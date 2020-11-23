@@ -4,14 +4,6 @@
 #include <stdexcept>
 
 #include <vulkan/vulkan_core.h>
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
 
 #include "vk/instance.hpp"
 
@@ -20,6 +12,11 @@ namespace thh
   class application
   {
   public:
+    application()
+    {
+      init_vulkan();
+    }
+    
     void run()
     {
 
@@ -28,7 +25,7 @@ namespace thh
   private:
     void init_vulkan()
     {
-    
+      create_instance();
     }
 
     void main_loop()

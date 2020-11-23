@@ -1,8 +1,7 @@
 #ifndef INSTANCE_H
 #define INSTANCE_H
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
+#include <vulkan/vulkan_core.h>
 
 #include "instance_builder.hpp"
 

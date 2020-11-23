@@ -4,13 +4,17 @@
 #include <exception>
 #include <string>
 
+#include <vulkan/vulkan_core.h>
+
+#include "../string_builder.hpp"
+
 namespace thh::vk
 {
   class api_call_error: public std::exception
   {
   public:
-    explicit api_call_error(const std::string& message)
-      : std::exception(), message(message)
+    api_call_error(const std::string& message, VkResult error_code)
+      : std::exception(), message(string_builder(message)("(error code ")(static_cast<int>(error_code))(")").str())
     {}
 
     virtual const char* what() const throw() override
