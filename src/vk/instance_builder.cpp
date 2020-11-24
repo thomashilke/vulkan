@@ -30,7 +30,7 @@ std::set<std::string> thh::vk::instance_builder::supported_vulkan_validation_lay
   uint32_t count{0};
   call(vkEnumerateInstanceLayerProperties, &count, nullptr);
 
-  std::vector<VkLayerProperties> layers_properties;
+  std::vector<VkLayerProperties> layers_properties(count);
   call(vkEnumerateInstanceLayerProperties, &count, layers_properties.data());
 
   std::set<std::string> layers_name;
@@ -60,7 +60,7 @@ thh::vk::instance_builder& thh::vk::instance_builder::with_validation_layer(cons
 {
   if (available_validation_layers.find(validation_layer_name) != available_validation_layers.end())
   {
-    enabled_extensions.insert(validation_layer_name);
+    enabled_validation_layers.insert(validation_layer_name);
   }
   else
   {
@@ -81,6 +81,15 @@ std::shared_ptr<thh::vk::instance> thh::vk::instance_builder::build() const
       return extension_name.c_str();
     });
 
+  std::vector<const char*> validation_layers(enabled_validation_layers.size(), nullptr);
+  std::transform(
+    enabled_validation_layers.begin(), enabled_validation_layers.end(),
+    validation_layers.begin(),
+    [](const std::string& validation_layer_name)
+    {
+      return validation_layer_name.c_str();
+    });
+
   VkApplicationInfo applicationInfo{};
   applicationInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   applicationInfo.pApplicationName = "application";
@@ -94,11 +103,11 @@ std::shared_ptr<thh::vk::instance> thh::vk::instance_builder::build() const
   instanceCreateInfo.pApplicationInfo = &applicationInfo;
   instanceCreateInfo.enabledExtensionCount = enabled_extensions.size();
   instanceCreateInfo.ppEnabledExtensionNames = enabled_extensions.size() > 0 ? extensions.data() : nullptr;
-  instanceCreateInfo.enabledLayerCount = 0;
-  instanceCreateInfo.ppEnabledLayerNames = nullptr;
+  instanceCreateInfo.enabledLayerCount = enabled_validation_layers.size();
+  instanceCreateInfo.ppEnabledLayerNames = enabled_validation_layers.size() > 0 ? validation_layers.data() : nullptr;
 
   VkInstance vulkan_instance{VK_NULL_HANDLE};
   call(vkCreateInstance, &instanceCreateInfo, nullptr, &vulkan_instance);
-  
+
   return std::shared_ptr<thh::vk::instance>(new instance(vulkan_instance));
 }

@@ -6,7 +6,6 @@
 #include <vulkan/vulkan_core.h>
 
 #include "vk/instance.hpp"
-#include "vk/physical_devices_collection.hpp"
 
 namespace thh
 {
@@ -17,7 +16,7 @@ namespace thh
     {
       init_vulkan();
     }
-    
+
     void run()
     {
 
@@ -42,12 +41,11 @@ namespace thh
     void create_instance()
     {
       instance =
-	vk::instance::builder("My application", "My application engine")
-	.with_extension("VK_KHR_surface")
-	//.with_validation_layer("VK_LAYER_LUNARG_api_dump")
-	.build();
-      
-      vk::physical_devices_collection::from_instance(*instance);
+        vk::instance::builder("My application", "My application engine")
+        .with_extension(VK_KHR_SURFACE_EXTENSION_NAME)
+        .with_extension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)
+        .with_validation_layer("VK_LAYER_KHRONOS_validation")
+        .build();
     }
 
     std::shared_ptr<vk::instance> instance;
