@@ -1,0 +1,6 @@
+build/src/main.o: src/main.cpp src/application.hpp src/vk/instance.hpp \
+ src/vk/instance_builder.hpp src/vk/api_call_error.hpp \
+ src/vk/../string_builder.hpp src/string_builder.hpp
+build/src/main.deps: src/main.cpp src/application.hpp src/vk/instance.hpp \
+ src/vk/instance_builder.hpp src/vk/api_call_error.hpp \
+ src/vk/../string_builder.hpp src/string_builder.hpp

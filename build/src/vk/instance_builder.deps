@@ -1,0 +1,6 @@
+build/src/vk/instance_builder.o: src/vk/instance_builder.cpp \
+ src/vk/instance_builder.hpp src/vk/../string_builder.hpp \
+ src/vk/instance.hpp src/vk/api_call.hpp src/vk/api_call_error.hpp
+build/src/vk/instance_builder.deps: src/vk/instance_builder.cpp \
+ src/vk/instance_builder.hpp src/vk/../string_builder.hpp \
+ src/vk/instance.hpp src/vk/api_call.hpp src/vk/api_call_error.hpp

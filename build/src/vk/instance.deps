@@ -1,0 +1,4 @@
+build/src/vk/instance.o: src/vk/instance.cpp src/vk/instance.hpp \
+ src/vk/instance_builder.hpp
+build/src/vk/instance.deps: src/vk/instance.cpp src/vk/instance.hpp \
+ src/vk/instance_builder.hpp

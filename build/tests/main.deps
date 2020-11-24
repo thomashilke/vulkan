@@ -1,0 +1,2 @@
+build/tests/main.o: tests/main.cpp
+build/tests/main.deps: tests/main.cpp
