@@ -1,12 +1,14 @@
 #ifndef INSTANCE_H
 #define INSTANCE_H
 
+#include <stdexcept>
+
 #include <vulkan/vulkan_core.h>
 
 #include "instance_builder.hpp"
 
 namespace thh::vk
-{  
+{
   class instance
   {
     friend class instance_builder;
@@ -31,7 +33,12 @@ namespace thh::vk
       
   private:
     instance(VkInstance vulkan_instance): vulkan_instance(vulkan_instance)
-    {}
+    {
+      if (vulkan_instance == VK_NULL_HANDLE)
+      {
+	throw std::invalid_argument("The vulkan instance cannot be null.");
+      }
+    }
 
   private:
     VkInstance vulkan_instance;
