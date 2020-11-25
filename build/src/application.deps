@@ -1,4 +1,0 @@
-build/src/application.o: src/application.cpp src/application.hpp \
- src/vk/instance.hpp src/vk/instance_builder.hpp
-build/src/application.deps: src/application.cpp src/application.hpp \
- src/vk/instance.hpp src/vk/instance_builder.hpp

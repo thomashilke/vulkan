@@ -1,2 +1,0 @@
-build/tests/tests.o: tests/tests.cpp
-build/tests/tests.deps: tests/tests.cpp
