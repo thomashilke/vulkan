@@ -6,6 +6,7 @@
 #include <vulkan/vulkan_core.h>
 
 #include "vk/instance.hpp"
+#include "vk/physical_devices_collection.hpp"
 
 namespace thh
 {
@@ -46,6 +47,8 @@ namespace thh
         .with_extension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)
         .with_validation_layer("VK_LAYER_KHRONOS_validation")
         .build();
+
+      vk::physical_devices_collection physical_devices{vk::physical_devices_collection::from_instance(*instance)};
     }
 
     std::shared_ptr<vk::instance> instance;
