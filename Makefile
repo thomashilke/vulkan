@@ -14,7 +14,7 @@ all: $(BIN) $(LIB) $(HEADERS) tests
 tests: bin/tests
 
 run-tests: tests
-	@bin/tests
+	@bin/tests --no_color_output
 
 -include $(DEPS)
 
